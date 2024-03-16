@@ -4,6 +4,7 @@
 package pl.futurecollars.invoicing;
 
 public class App {
+
     public String getGreeting() {
         return "Hello World!";
     }
