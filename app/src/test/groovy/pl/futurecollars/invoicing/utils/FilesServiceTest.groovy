@@ -10,7 +10,7 @@ class FilesServiceTest extends Specification {
     private FilesService filesService = new FilesService()
    // private Path path = Files.createTempFile(Paths.get(System.getProperty("java.io.tmpdir")), "lines", ".txt")
 
-    private Path path = Files.createTempFile('lines', '.txt').toPath()
+    private Path path = Files.createTempFile('lines', '.txt')
 
 
     def "append line to file"() {
