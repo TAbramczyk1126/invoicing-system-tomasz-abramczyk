@@ -10,7 +10,7 @@ import java.nio.file.Files
 
 class FileBasedDatabaseIntegrationTest extends AbstractDatabaseTest {
 
-    def dbPath
+    def databasePath
 
   // @Override
     Database getDatabaseInstance() {
@@ -19,8 +19,8 @@ class FileBasedDatabaseIntegrationTest extends AbstractDatabaseTest {
         def idPath = File.createTempFile('ids', '.txt').toPath()
         def idService = new IdService(idPath,filesService)
 
-        dbPath = File.createTempFile('invoices', '.txt').toPath()
-        return new FileBasedDatabase(dbPath, idService, filesService, new JsonService())
+        databasePath = File.createTempFile('invoices', '.txt').toPath()
+        return new FileBasedDatabase(databasePath, idService, filesService, new JsonService())
     }
     def "file based database writes invoices to correct file"() {
         given:
@@ -28,10 +28,10 @@ class FileBasedDatabaseIntegrationTest extends AbstractDatabaseTest {
         when:
         db.save(TestHelpers.invoice(4))
         then:
-        1 == Files.readAllLines(dbPath).size()
+        1 == Files.readAllLines(databasePath).size()
         when:
         db.save(TestHelpers.invoice(5))
         then:
-        2 == Files.readAllLines(dbPath).size()
+        2 == Files.readAllLines(databasePath).size()
     }
 }
