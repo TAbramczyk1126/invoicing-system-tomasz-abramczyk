@@ -12,7 +12,7 @@ class FileBasedDatabaseIntegrationTest extends AbstractDatabaseTest {
 
     def dbPath
 
- //  @Override
+  // @Override
     Database getDatabaseInstance() {
 
         def filesService = new FilesService()

@@ -12,7 +12,7 @@ abstract class AbstractDatabaseTest extends Specification{
     private List<Invoice> invoices
 
     def setup() {
-        database = new InMemoryDatabase();
+        database = new InMemoryDatabase()
 
         invoices = (1..12).collect { invoice(it) }
     }
@@ -68,7 +68,7 @@ abstract class AbstractDatabaseTest extends Specification{
 
     def "deleting not existing invoice is not causing any error"() {
         expect:
-        database.delete(123);
+        database.delete(123) == null
     }
 
     def "it's possible to update the invoice"() {
