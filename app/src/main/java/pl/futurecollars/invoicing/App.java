@@ -41,13 +41,10 @@ public class App {
     Invoice invoice = new Invoice(LocalDate.now(), buyer, seller, products);
     Invoice invoice2 = new Invoice(LocalDate.now(), buyer1, seller, products);
 
-
     int id = service.save(invoice);
     int id1 = service.save(invoice2);
 
-
     Invoice invoiceFromDb = service.getById(id).orElseThrow(() -> new RuntimeException());
-
 
     System.out.println(service.getAll());
 
@@ -62,6 +59,5 @@ public class App {
     fileService.writeToFile(Path.of("invoice.json"), jsonData);
 
     System.out.println("Invoice data saved to invoice.json file.");
-
   }
 }

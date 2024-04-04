@@ -7,7 +7,6 @@ import pl.futurecollars.invoicing.utils.FilesService;
 
 public class IdService {
 
-
   private final Path idFilePath;
   private final FilesService filesService;
 

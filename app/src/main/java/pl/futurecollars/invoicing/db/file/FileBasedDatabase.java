@@ -30,7 +30,6 @@ public class FileBasedDatabase implements Database {
     }
   }
 
-
   @Override
   public Optional<Invoice> getById(int id) {
     try {
@@ -47,7 +46,6 @@ public class FileBasedDatabase implements Database {
   private boolean containsId(String line, int id) {
     return line.contains("\"id\":" + id + ",");
   }
-
 
   @Override
   public List<Invoice> getAll() {
