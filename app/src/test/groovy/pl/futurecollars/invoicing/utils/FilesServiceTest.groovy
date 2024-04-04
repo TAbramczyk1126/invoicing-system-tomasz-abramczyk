@@ -8,10 +8,8 @@ import java.nio.file.Path
 class FilesServiceTest extends Specification {
 
     private FilesService filesService = new FilesService()
-   // private Path path = Files.createTempFile(Paths.get(System.getProperty("java.io.tmpdir")), "lines", ".txt")
 
     private Path path = Files.createTempFile('lines', '.txt')
-
 
     def "append line to file"() {
         given:
@@ -31,12 +29,5 @@ class FilesServiceTest extends Specification {
         and:
         Files.readAllLines(path).size() == 2
         Files.readAllLines(path)[1] == additionalLine
-        //stworzyc string z "linijka"
-        //dopisac do pliku
-        //oczytac z pliku Files.readAllLines
-        //porownac czy ta orginalna jest taka sama jak odczytana
-
-        //jezeli chcesz to mozesz dorzucic jeszcze jedna i odczytac do tablicy "readlAllLines"
-
     }
 }
