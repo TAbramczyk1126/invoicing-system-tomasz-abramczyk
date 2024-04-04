@@ -42,9 +42,9 @@ public class App {
     Invoice invoice2 = new Invoice(LocalDate.now(), buyer1, seller, products);
 
     int id = service.save(invoice);
-    int id1 = service.save(invoice2);
+    //int id1 = service.save(invoice2);
 
-    Invoice invoiceFromDb = service.getById(id).orElseThrow(() -> new RuntimeException());
+    //Invoice invoiceFromDb = service.getById(id).orElseThrow(() -> new RuntimeException());
 
     System.out.println(service.getAll());
 
