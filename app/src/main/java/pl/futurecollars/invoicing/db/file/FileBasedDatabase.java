@@ -63,6 +63,12 @@ public class FileBasedDatabase implements Database {
   public Optional<Invoice> update(int id, Invoice updatedInvoice) {
     try {
       List<String> allInvoices = filesService.readAllLines(databasePath);
+      long countInvoicesWithGivenId = allInvoices.stream()
+          .filter(line -> containsId(line, id))
+          .count();
+      if (countInvoicesWithGivenId == 0) {
+        throw new IllegalArgumentException("Id " + id + " does not exist"); // Invoice doesn't exist
+      }
       var invoicesWithoutInvoiceWithGivenId = allInvoices
           .stream()
           .filter(line -> !containsId(line, id))
