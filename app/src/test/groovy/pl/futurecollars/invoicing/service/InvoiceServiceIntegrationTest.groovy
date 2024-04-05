@@ -7,7 +7,7 @@ import spock.lang.Specification
 
 import static pl.futurecollars.invoicing.TestHelpers.invoice
 
-class InvoiceServiceIntegrationTest extends Specification{
+class InvoiceServiceIntegrationTest extends Specification {
 
     private InvoiceService service;
     private List<Invoice> invoices;
@@ -69,8 +69,14 @@ class InvoiceServiceIntegrationTest extends Specification{
     }
 
     def "deleting not existing invoice is not causing any error"() {
-        expect:
-        service.delete(123);
+        given:
+        def service = new InvoiceService(new InMemoryDatabase())
+
+        when:
+        def deletedInvoice = service.delete(123)
+
+        then:
+        deletedInvoice == null
     }
 
     def "it's possible to update the invoice"() {
