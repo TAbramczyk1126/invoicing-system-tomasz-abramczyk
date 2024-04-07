@@ -33,6 +33,5 @@ class FileBasedDatabaseIntegrationTest extends AbstractDatabaseTest {
         db.save(TestHelpers.invoice(5))
         then:
         2 == Files.readAllLines(databasePath).size()
-
     }
 }
