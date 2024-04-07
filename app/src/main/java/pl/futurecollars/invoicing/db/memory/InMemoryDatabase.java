@@ -43,7 +43,6 @@ public class InMemoryDatabase implements Database {
 
   @Override
   public Optional<Invoice> delete(int id) {
-    invoices.remove(id);
-    return null;
+    return Optional.ofNullable(invoices.remove(id));
   }
 }

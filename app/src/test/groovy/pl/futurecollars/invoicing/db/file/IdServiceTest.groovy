@@ -2,7 +2,6 @@ package pl.futurecollars.invoicing.db.file
 
 import pl.futurecollars.invoicing.utils.FilesService
 import spock.lang.Specification
-
 import java.nio.file.Files
 import java.nio.file.Path
 

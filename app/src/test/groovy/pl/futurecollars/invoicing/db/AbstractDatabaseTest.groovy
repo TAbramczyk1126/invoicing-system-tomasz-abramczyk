@@ -60,12 +60,11 @@ abstract class AbstractDatabaseTest extends Specification {
         then:
         database.getAll().isEmpty()
     }
-/*
+
     def "deleting not existing invoice is not causing any error"() {
         expect:
-        database.delete(123) == null
+        database.delete(123) == Optional.empty()
     }
-*/
 
     def "it's possible to update the invoice"() {
         given:
@@ -77,7 +76,7 @@ abstract class AbstractDatabaseTest extends Specification {
         then:
         database.getById(id).get() == invoices.get(1)
     }
-/*
+
     def "updating not existing invoice throws exception"() {
         when:
         database.update(213, invoices.get(1))
@@ -86,5 +85,4 @@ abstract class AbstractDatabaseTest extends Specification {
         def ex = thrown(IllegalArgumentException)
         ex.message == "Id 213 does not exist"
     }
-    */
 }
