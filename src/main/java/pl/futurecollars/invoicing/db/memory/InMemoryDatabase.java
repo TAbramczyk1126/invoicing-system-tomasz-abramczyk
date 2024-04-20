@@ -5,13 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Repository;
 import pl.futurecollars.invoicing.db.Database;
 import pl.futurecollars.invoicing.model.Invoice;
 
-@Primary
-@Repository
 public class InMemoryDatabase implements Database {
 
   private final Map<Integer, Invoice> invoices = new HashMap<>();
@@ -36,13 +32,8 @@ public class InMemoryDatabase implements Database {
 
   @Override
   public Optional<Invoice> update(int id, Invoice updatedInvoice) {
-    if (!invoices.containsKey(id)) {
-      throw new IllegalArgumentException("Id " + id + " does not exist");
-    }
-
     updatedInvoice.setId(id);
-    invoices.put(id, updatedInvoice);
-    return null;
+    return Optional.ofNullable(invoices.put(id, updatedInvoice));
   }
 
   @Override

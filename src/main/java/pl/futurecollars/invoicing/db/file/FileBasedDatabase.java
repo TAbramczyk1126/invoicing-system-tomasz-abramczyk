@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import pl.futurecollars.invoicing.db.Database;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.utils.FilesService;
 import pl.futurecollars.invoicing.utils.JsonService;
 
 @AllArgsConstructor
+@Slf4j
 public class FileBasedDatabase implements Database {
 
   private final Path databasePath;
@@ -26,6 +28,7 @@ public class FileBasedDatabase implements Database {
       filesService.appendLineToFile(databasePath, jsonService.toJson(invoice));
       return invoice.getId();
     } catch (IOException e) {
+      //log.info("Problem z zapisaniem danych");
       throw new RuntimeException("Failed to save invoice: " + e.getMessage());
     }
   }
@@ -39,6 +42,7 @@ public class FileBasedDatabase implements Database {
           .map(line -> jsonService.toObject(line, Invoice.class))
           .findFirst();
     } catch (IOException ex) {
+      //log.info("Problem ze znalezieniem danych po id: {}", id);
       throw new RuntimeException("Database failed to get invoice with id: " + id, ex);
     }
   }
@@ -55,6 +59,7 @@ public class FileBasedDatabase implements Database {
           .map(line -> jsonService.toObject(line, Invoice.class))
           .collect(Collectors.toList());
     } catch (IOException ex) {
+      //log.info("Problem z odczytaniem danych");
       throw new RuntimeException("Failed to read invoices from file", ex);
     }
   }
@@ -63,12 +68,6 @@ public class FileBasedDatabase implements Database {
   public Optional<Invoice> update(int id, Invoice updatedInvoice) {
     try {
       List<String> allInvoices = filesService.readAllLines(databasePath);
-      long countInvoicesWithGivenId = allInvoices.stream()
-          .filter(line -> containsId(line, id))
-          .count();
-      if (countInvoicesWithGivenId == 0) {
-        throw new IllegalArgumentException("Id " + id + " does not exist"); // Invoice doesn't exist
-      }
       var invoicesWithoutInvoiceWithGivenId = allInvoices
           .stream()
           .filter(line -> !containsId(line, id))
@@ -79,6 +78,7 @@ public class FileBasedDatabase implements Database {
       allInvoices.removeAll(invoicesWithoutInvoiceWithGivenId);
       return allInvoices.isEmpty() ? Optional.empty() : Optional.of(jsonService.toObject(allInvoices.get(0), Invoice.class));
     } catch (IOException ex) {
+      //log.info("Problem z aktualizacja danych po id: {}", id);
       throw new RuntimeException("Failed to update invoice with id: " + id, ex);
     }
   }
@@ -95,6 +95,7 @@ public class FileBasedDatabase implements Database {
       allInvoices.removeAll(invoicesExceptDeleted);
       return allInvoices.isEmpty() ? Optional.empty() : Optional.of(jsonService.toObject(allInvoices.get(0), Invoice.class));
     } catch (IOException ex) {
+      //log.info("Problem z usunieciem danych po id: {}", id);
       throw new RuntimeException("Failed to delete invoice with id: " + id, ex);
     }
   }
