@@ -9,7 +9,10 @@ invoicing-system:
 
 logging:
   level:
+    org:
+      springframework:
+        boot: INFO
     pl:
       futurecollars:
         invoicing: TRACE
-        invoicing.db: DEBUG
+        invoicing.db: INFO
