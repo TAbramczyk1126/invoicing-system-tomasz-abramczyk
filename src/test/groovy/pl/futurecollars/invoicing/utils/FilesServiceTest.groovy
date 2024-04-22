@@ -30,4 +30,40 @@ class FilesServiceTest extends Specification {
         Files.readAllLines(path).size() == 2
         Files.readAllLines(path)[1] == additionalLine
     }
+
+    def "should write single line to file"() {
+        given:
+        if (!Files.exists(path)) {
+            Files.createFile(path)
+        }
+
+        when:
+        new FilesService().writeToFile(path, "test")
+
+        then:
+        Files.readAllLines(path) == ["test"]
+    }
+
+    def "should write all lines to file"() {
+        given:
+        List<String> lines = ["Line 1", "Line 2", "Line 3"]
+        if (!Files.exists(path)) {
+            Files.createFile(path)
+        }
+
+        when:
+        new FilesService().writeLinesToFile(path, lines)
+
+        then:
+        Files.readAllLines(path) == lines
+    }
+
+    def "should read all lines from file"() {
+        given:
+        List<String> lines = ["line1", "line2", "line3"]
+        Files.write(path, lines)
+
+        expect:
+        new FilesService().readAllLines(path) == lines
+    }
 }

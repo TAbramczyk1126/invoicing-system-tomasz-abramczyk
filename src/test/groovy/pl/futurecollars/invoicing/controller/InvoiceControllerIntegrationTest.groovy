@@ -103,7 +103,7 @@ class InvoiceControllerIntegrationTest extends Specification {
         id << [-100, -2, -1, 0, 168, 1256]
     }
 
-  /*  def "404 is returned when invoice id is not found when updating invoice [#id]"() {
+    def "404 is returned when invoice id is not found when updating invoice [#id]"() {
         given:
         addUniqueInvoices(11)
 
@@ -116,9 +116,9 @@ class InvoiceControllerIntegrationTest extends Specification {
                 .andExpect(status().isNotFound())
 
         where:
-        id << [-22]
+        id << [-22,36,0,100,212,222]
     }
-*/
+
     def "invoice id can be modified"() {
         given:
         def id = addInvoiceAndReturnId(invoiceAsJson(44))

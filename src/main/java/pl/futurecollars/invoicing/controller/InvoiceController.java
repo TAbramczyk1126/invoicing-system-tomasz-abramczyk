@@ -1,6 +1,7 @@
 package pl.futurecollars.invoicing.controller;
 
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.service.InvoiceService;
 
+@Slf4j
 @RestController
 @RequestMapping("invoices")
 public class InvoiceController {
@@ -27,6 +29,7 @@ public class InvoiceController {
 
   @PostMapping
   public int add(@RequestBody Invoice invoice) {
+    log.info("Used postMapping update - info");
     return invoiceService.save(invoice);
   }
 
@@ -37,6 +40,7 @@ public class InvoiceController {
 
   @GetMapping(value = "/{id}", produces = {"application/json;charset=UTF-8"})
   public ResponseEntity<Invoice> getById(@PathVariable int id) {
+    log.info("Used getMapping update - info");
     return invoiceService.getById(id)
         .map(invoice -> ResponseEntity.ok().body(invoice))
         .orElse(ResponseEntity.notFound().build());
@@ -44,6 +48,7 @@ public class InvoiceController {
 
   @PutMapping("/{id}")
   public ResponseEntity<?> update(@PathVariable int id, @RequestBody Invoice invoice) {
+    log.info("Used putMapping update - info");
     return invoiceService.update(id, invoice)
         .map(name -> ResponseEntity.noContent().build())
         .orElse(ResponseEntity.notFound().build());
@@ -51,6 +56,7 @@ public class InvoiceController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> deleteById(@PathVariable int id) {
+    log.info("Used deleteMapping update - info");
     return invoiceService.delete(id)
         .map(name -> ResponseEntity.noContent().build())
         .orElse(ResponseEntity.notFound().build());
