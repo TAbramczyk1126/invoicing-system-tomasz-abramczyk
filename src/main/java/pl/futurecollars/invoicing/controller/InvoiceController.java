@@ -4,21 +4,15 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.service.InvoiceService;
 
 @Slf4j
 @RestController
-@RequestMapping("invoices")
-public class InvoiceController {
+public class InvoiceController implements InvoiceApi {
 
   private final InvoiceService invoiceService;
 
@@ -27,18 +21,18 @@ public class InvoiceController {
     this.invoiceService = invoiceService;
   }
 
-  @PostMapping
+@Override
   public int add(@RequestBody Invoice invoice) {
     log.info("Used postMapping update - info");
     return invoiceService.save(invoice);
   }
 
-  @GetMapping(produces = {"application/json;charset=UTF-8"})
+@Override
   public List<Invoice> getAll() {
     return invoiceService.getAll();
   }
 
-  @GetMapping(value = "/{id}", produces = {"application/json;charset=UTF-8"})
+@Override
   public ResponseEntity<Invoice> getById(@PathVariable int id) {
     log.info("Used getMapping update - info");
     return invoiceService.getById(id)
@@ -46,16 +40,16 @@ public class InvoiceController {
         .orElse(ResponseEntity.notFound().build());
   }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<?> update(@PathVariable int id, @RequestBody Invoice invoice) {
+  @Override
+    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Invoice invoice) {
     log.info("Used putMapping update - info");
     return invoiceService.update(id, invoice)
         .map(name -> ResponseEntity.noContent().build())
         .orElse(ResponseEntity.notFound().build());
   }
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<?> deleteById(@PathVariable int id) {
+  @Override
+    public ResponseEntity<?> deleteById(@PathVariable int id) {
     log.info("Used deleteMapping update - info");
     return invoiceService.delete(id)
         .map(name -> ResponseEntity.noContent().build())

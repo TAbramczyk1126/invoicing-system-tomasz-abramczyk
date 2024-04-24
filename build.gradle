@@ -16,6 +16,8 @@ buildscript {
         spockVersion = '2.2-groovy-3.0'
         springBootVersion = '2.4.2'
         springDependencyVersion = '1.0.11.RELEASE'
+        springFoxStarterVersion = '3.0.0'
+        springFoxUiVersion = '3.0.0'
     }
 }
 
@@ -71,6 +73,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     testImplementation "org.spockframework:spock-spring:${spockVersion}"
+
+    implementation "io.springfox:springfox-boot-starter:${springFoxStarterVersion}"
+
+    implementation "io.springfox:springfox-swagger-ui:${springFoxUiVersion}"
 }
 
 application {
