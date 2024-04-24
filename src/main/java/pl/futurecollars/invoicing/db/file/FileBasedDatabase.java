@@ -28,7 +28,7 @@ public class FileBasedDatabase implements Database {
       filesService.appendLineToFile(databasePath, jsonService.toJson(invoice));
       return invoice.getId();
     } catch (IOException e) {
-//      log.info("Problem z zapisaniem danych");
+      //log.info("Problem z zapisaniem danych");
       throw new RuntimeException("Failed to save invoice: " + e.getMessage());
     }
   }
@@ -42,7 +42,7 @@ public class FileBasedDatabase implements Database {
           .map(line -> jsonService.toObject(line, Invoice.class))
           .findFirst();
     } catch (IOException ex) {
-//      log.info("Problem ze znalezieniem danych po id: {}", id);
+      //log.info("Problem ze znalezieniem danych po id: {}", id);
       throw new RuntimeException("Database failed to get invoice with id: " + id, ex);
     }
   }
@@ -59,7 +59,7 @@ public class FileBasedDatabase implements Database {
           .map(line -> jsonService.toObject(line, Invoice.class))
           .collect(Collectors.toList());
     } catch (IOException ex) {
-//      log.info("Problem z odczytaniem danych");
+      //log.info("Problem z odczytaniem danych");
       throw new RuntimeException("Failed to read invoices from file", ex);
     }
   }
@@ -78,7 +78,7 @@ public class FileBasedDatabase implements Database {
       allInvoices.removeAll(invoicesWithoutInvoiceWithGivenId);
       return allInvoices.isEmpty() ? Optional.empty() : Optional.of(jsonService.toObject(allInvoices.get(0), Invoice.class));
     } catch (IOException ex) {
-//      log.info("Problem z aktualizacja danych po id: {}", id);
+      //log.info("Problem z aktualizacja danych po id: {}", id);
       throw new RuntimeException("Failed to update invoice with id: " + id, ex);
     }
   }
@@ -95,7 +95,7 @@ public class FileBasedDatabase implements Database {
       allInvoices.removeAll(invoicesExceptDeleted);
       return allInvoices.isEmpty() ? Optional.empty() : Optional.of(jsonService.toObject(allInvoices.get(0), Invoice.class));
     } catch (IOException ex) {
-//      log.info("Problem z usunieciem danych po id: {}", id);
+      //log.info("Problem z usunieciem danych po id: {}", id);
       throw new RuntimeException("Failed to delete invoice with id: " + id, ex);
     }
   }
