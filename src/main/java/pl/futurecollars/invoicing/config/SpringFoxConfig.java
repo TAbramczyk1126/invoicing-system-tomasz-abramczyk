@@ -22,12 +22,12 @@ public class SpringFoxConfig {
         .paths(PathSelectors.any())
         .build()
         .tags(
-            new Tag("invoice-controller","Controller used to list / add / update / delete invoices")
+            new Tag("invoice-controller", "Controller used to list / add / update / delete invoices")
         )
         .apiInfo(apiInfo());
   }
 
-  private ApiInfo apiInfo(){
+  private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
         .description("Application to manage set of invoice")
         .license("No license available - private!")

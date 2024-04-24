@@ -24,7 +24,7 @@ public class InvoiceEntry {
   @ApiModelProperty(value = "tax rate", required = true)
   private Vat vatRate;
 
-  public InvoiceEntry(String description, int quantity,BigDecimal price, BigDecimal vatValue, Vat vatRate) {
+  public InvoiceEntry(String description, int quantity, BigDecimal price, BigDecimal vatValue, Vat vatRate) {
     this.description = description;
     this.quantity = quantity;
     this.price = price;
