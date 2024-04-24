@@ -16,6 +16,7 @@ import pl.futurecollars.invoicing.model.Invoice;
 @RequestMapping("invoices")
 @Api(tags = "invoice-controller")
 public interface InvoiceApi {
+
   @ApiOperation(value = "Add new invoice to system")
   @PostMapping
   int add(@RequestBody Invoice invoice);
