@@ -49,7 +49,6 @@ class InvoiceControllerStepwiseTest extends Specification {
         response == "[]"
     }
 
-
     def "add single invoice"() {
         given:
         def invoiceAsJson = jsonService.toJson(originalInvoice)

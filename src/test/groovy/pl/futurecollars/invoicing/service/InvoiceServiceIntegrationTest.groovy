@@ -96,7 +96,7 @@ class InvoiceServiceIntegrationTest extends Specification {
         Invoice updatedInvoice = new Invoice()
 
         when:
-               Optional<Invoice> result = service.update(123, updatedInvoice)
+        Optional<Invoice> result = service.update(123, updatedInvoice)
         then:
         result == Optional.empty()
     }

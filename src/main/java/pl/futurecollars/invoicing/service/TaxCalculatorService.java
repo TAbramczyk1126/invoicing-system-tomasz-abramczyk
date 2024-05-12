@@ -14,39 +14,39 @@ public class TaxCalculatorService {
 
   private Database database;
 
-  public BigDecimal income (String taxIdentificationNumber){
+  public BigDecimal income(String taxIdentificationNumber) {
     return database.visit(sellerPredicate(taxIdentificationNumber), InvoiceEntry::getPrice);
   }
 
-  public BigDecimal costs(String taxIdentificationNumber){
+  public BigDecimal costs(String taxIdentificationNumber) {
     return database.visit(buyerPredicate(taxIdentificationNumber), InvoiceEntry::getPrice);
   }
 
-  public BigDecimal incomingVat(String taxIdentificationNumber){
+  public BigDecimal incomingVat(String taxIdentificationNumber) {
     return database.visit(sellerPredicate(taxIdentificationNumber), InvoiceEntry::getVatValue);
   }
 
-  public BigDecimal outgoingVat(String taxIdentificationNumber){
+  public BigDecimal outgoingVat(String taxIdentificationNumber) {
     return database.visit(buyerPredicate(taxIdentificationNumber), InvoiceEntry::getVatValue);
   }
 
-  public BigDecimal getEarnings(String taxIdentificationNumber){
+  public BigDecimal getEarnings(String taxIdentificationNumber) {
     return income(taxIdentificationNumber).subtract(costs(taxIdentificationNumber));
   }
 
-  public BigDecimal getVatToReturn(String taxIdentificationNumber){
+  public BigDecimal getVatToReturn(String taxIdentificationNumber) {
     return incomingVat(taxIdentificationNumber).subtract(outgoingVat(taxIdentificationNumber));
   }
 
-  private Predicate<Invoice> sellerPredicate(String taxIdentificationNumber){
+  private Predicate<Invoice> sellerPredicate(String taxIdentificationNumber) {
     return invoice -> taxIdentificationNumber.equals(invoice.getSeller().getTaxIdentificationNumber());
   }
 
-  private Predicate<Invoice> buyerPredicate(String taxIdentificationNumber){
+  private Predicate<Invoice> buyerPredicate(String taxIdentificationNumber) {
     return invoice -> taxIdentificationNumber.equals(invoice.getBuyer().getTaxIdentificationNumber());
   }
 
-  public TaxCalculatorResult calculateTaxes(String taxIdentificationNumber){
+  public TaxCalculatorResult calculateTaxes(String taxIdentificationNumber) {
     return TaxCalculatorResult.builder()
         .income(income(taxIdentificationNumber))
         .costs(costs(taxIdentificationNumber))

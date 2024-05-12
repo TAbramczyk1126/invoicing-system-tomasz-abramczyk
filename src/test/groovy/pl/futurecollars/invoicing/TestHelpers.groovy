@@ -4,8 +4,6 @@ import pl.futurecollars.invoicing.model.Company
 import pl.futurecollars.invoicing.model.Invoice
 import pl.futurecollars.invoicing.model.InvoiceEntry
 import pl.futurecollars.invoicing.model.Vat
-
-
 import java.time.LocalDate
 
 class TestHelpers {
@@ -19,7 +17,6 @@ class TestHelpers {
     }
 
     static product(int id) {
-        //new InvoiceEntry("Programming course $id", 4, BigDecimal.valueOf(id * 1000), BigDecimal.valueOf(id * 1000 * 0.08), Vat.VAT_8)
         InvoiceEntry.builder()
                 .description("Programming course $id")
                 .quantity(4)
@@ -30,7 +27,6 @@ class TestHelpers {
     }
 
     static invoice(int id) {
-        //new Invoice(LocalDate.now(), company(id), company(id), List.of(product(id)))
         Invoice.builder()
                 .date(LocalDate.now())
                 .buyer(company(id + 10))

@@ -74,7 +74,7 @@ class TaxCalculatorControllerIntegrationTest extends AbstractControllerTest {
 
     def "correct values are returned when company was buyer and seller"() {
         given:
-        addUniqueInvoices(15) // sellers: 1-15, buyers: 10-25, 10-15 overlapping
+        addUniqueInvoices(15)
 
         when:
         def taxCalculatorResponse = calculateTax("12")

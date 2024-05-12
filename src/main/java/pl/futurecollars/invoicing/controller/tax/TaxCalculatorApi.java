@@ -12,7 +12,7 @@ import pl.futurecollars.invoicing.service.TaxCalculatorResult;
 @Api(tags = {"tax-controller"})
 public interface TaxCalculatorApi {
 
-  @ApiOperation(value ="Get incomes, costs, vat and taxes to pay")
+  @ApiOperation(value = "Get incomes, costs, vat and taxes to pay")
   @GetMapping(value = "/{taxIdentificationNumber}", produces = {"application/json;charset=UTF-8"})
   TaxCalculatorResult calculateTaxes(@PathVariable @ApiParam(example = "111-111-11-11") String taxIdentificationNumber);
 }

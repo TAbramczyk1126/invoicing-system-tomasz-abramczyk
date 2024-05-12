@@ -21,18 +21,18 @@ public class InvoiceController implements InvoiceApi {
     this.invoiceService = invoiceService;
   }
 
-@Override
+  @Override
   public int add(@RequestBody Invoice invoice) {
     log.info("Used postMapping update - info");
     return invoiceService.save(invoice);
   }
 
-@Override
+  @Override
   public List<Invoice> getAll() {
     return invoiceService.getAll();
   }
 
-@Override
+  @Override
   public ResponseEntity<Invoice> getById(@PathVariable int id) {
     log.info("Used getMapping update - info");
     return invoiceService.getById(id)
@@ -41,7 +41,7 @@ public class InvoiceController implements InvoiceApi {
   }
 
   @Override
-    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Invoice invoice) {
+  public ResponseEntity<?> update(@PathVariable int id, @RequestBody Invoice invoice) {
     log.info("Used putMapping update - info");
     return invoiceService.update(id, invoice)
         .map(name -> ResponseEntity.noContent().build())
@@ -49,7 +49,7 @@ public class InvoiceController implements InvoiceApi {
   }
 
   @Override
-    public ResponseEntity<?> deleteById(@PathVariable int id) {
+  public ResponseEntity<?> deleteById(@PathVariable int id) {
     log.info("Used deleteMapping update - info");
     return invoiceService.delete(id)
         .map(name -> ResponseEntity.noContent().build())

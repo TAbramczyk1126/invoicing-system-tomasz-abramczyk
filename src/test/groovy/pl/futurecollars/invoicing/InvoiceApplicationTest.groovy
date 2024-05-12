@@ -17,6 +17,7 @@ class InvoiceApplicationTest extends Specification {
         invoiceService
 
     }
+
     def "should return no invoices when database is empty"() {
         given:
 

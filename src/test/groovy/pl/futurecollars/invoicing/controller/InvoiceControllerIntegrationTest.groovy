@@ -93,7 +93,7 @@ class InvoiceControllerIntegrationTest extends AbstractControllerTest {
                 .andExpect(status().isNotFound())
 
         where:
-        id << [-22,36,0,100,212,222]
+        id << [-22, 36, 0, 100, 212, 222]
     }
 
     def "invoice id can be modified"() {

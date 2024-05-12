@@ -7,12 +7,12 @@ import pl.futurecollars.invoicing.service.TaxCalculatorService;
 
 @RestController
 @AllArgsConstructor
-public class TaxCalculatorController implements TaxCalculatorApi{
+public class TaxCalculatorController implements TaxCalculatorApi {
 
   private final TaxCalculatorService taxCalculatorService;
 
   @Override
-  public TaxCalculatorResult calculateTaxes(String taxIdentificationNumber){
+  public TaxCalculatorResult calculateTaxes(String taxIdentificationNumber) {
     return taxCalculatorService.calculateTaxes(taxIdentificationNumber);
   }
 }
