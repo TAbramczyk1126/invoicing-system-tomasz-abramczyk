@@ -42,7 +42,6 @@ public class TaxCalculatorService {
     return collectedVat(taxIdentificationNumber).subtract(paidVat(taxIdentificationNumber));
   }
 
-
   public TaxCalculatorResult calculateTaxes(Company company) {
     String taxIdentificationNumber = company.getTaxIdentifications();
 

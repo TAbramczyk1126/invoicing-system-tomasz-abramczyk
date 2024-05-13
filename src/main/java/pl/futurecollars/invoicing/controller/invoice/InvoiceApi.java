@@ -23,11 +23,11 @@ public interface InvoiceApi {
   int add(@RequestBody Invoice invoice);
 
   @ApiOperation(value = "Get list of all invoices")
-  @GetMapping//(produces = {"application/json;charset=UTF-8"})
+  @GetMapping
   List<Invoice> getAll();
 
   @ApiOperation(value = "Get invoice by id")
-  @GetMapping(value = "/{id}")//, produces = {"application/json;charset=UTF-8"})
+  @GetMapping(value = "/{id}")
   ResponseEntity<Invoice> getById(@PathVariable int id);
 
   @ApiOperation(value = "Update invoice with given id")
