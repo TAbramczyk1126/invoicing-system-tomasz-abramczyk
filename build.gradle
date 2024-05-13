@@ -41,6 +41,8 @@ repositories {
 }
 
 dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+
     testImplementation "org.codehaus.groovy:groovy:${groovyVersion}"
 
     testImplementation "org.spockframework:spock-core:${spockVersion}"
@@ -63,6 +65,9 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}"
+
+    runtimeOnly 'org.postgresql:postgresql:42.2.19'
+    runtimeOnly 'com.h2database:h2:1.4.200'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

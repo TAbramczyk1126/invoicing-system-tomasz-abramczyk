@@ -21,15 +21,15 @@ public class JsonService {
     try {
       return mapper.writeValueAsString(object);
     } catch (IOException e) {
-      throw new RuntimeException("Failed to convert object to json", e);
+      throw new RuntimeException("Failed to convert object to JSON", e);
     }
   }
 
-  public <T> T toObject(String jsonString, Class<T> clazz) {
+  public <T> T toObject(String json, Class<T> clazz) {
     try {
-      return mapper.readValue(jsonString, clazz);
+      return mapper.readValue(json, clazz);
     } catch (JsonProcessingException e) {
-      throw new RuntimeException("Failed to convert json to object", e);
+      throw new RuntimeException("Failed to convert JSON to object", e);
     }
   }
 }

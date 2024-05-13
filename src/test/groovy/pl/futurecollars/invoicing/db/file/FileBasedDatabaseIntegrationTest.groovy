@@ -1,6 +1,6 @@
 package pl.futurecollars.invoicing.db.file
 
-import pl.futurecollars.invoicing.TestHelpers
+import pl.futurecollars.invoicing.helpers.TestHelpers
 import pl.futurecollars.invoicing.db.AbstractDatabaseTest
 import pl.futurecollars.invoicing.db.Database
 import pl.futurecollars.invoicing.utils.FilesService
@@ -18,7 +18,7 @@ class FileBasedDatabaseIntegrationTest extends AbstractDatabaseTest {
         databasePath = File.createTempFile("testDatabase", ".txt").toPath()
         FilesService filesService = new FilesService()
         JsonService jsonService = new JsonService()
-        IdService idService = new IdService(File.createTempFile("testId", ".txt").toPath(), filesService)
+        IdProvider idService = new IdProvider(File.createTempFile("testId", ".txt").toPath(), filesService)
         return new FileBasedDatabase(databasePath, idService, filesService, jsonService)
     }
 

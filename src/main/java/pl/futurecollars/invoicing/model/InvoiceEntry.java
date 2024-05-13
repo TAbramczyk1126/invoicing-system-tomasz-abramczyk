@@ -20,12 +20,15 @@ public class InvoiceEntry {
   private int quantity;
 
   @ApiModelProperty(value = "Product/service netto price", required = true, example = "1111.22")
-  private BigDecimal price;
+  private BigDecimal netPrice;
 
   @ApiModelProperty(value = "Product/ service tax value", required = true, example = "22.22")
   private BigDecimal vatValue;
 
   @ApiModelProperty(value = "tax rate", required = true)
   private Vat vatRate;
+
+  @ApiModelProperty(value = "Car this expense is related to, empty if expense is not related to car")
+  private Car expensionRelatedToCar;
 
 }
