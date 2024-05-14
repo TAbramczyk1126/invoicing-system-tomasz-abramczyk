@@ -7,10 +7,11 @@
  */
 
 buildscript {
-    ext{
+    ext {
         groovyVersion = '3.0.13'
         guavaVersion = '31.1-jre'
         jacksonVersion = '2.11.1'
+        jococoToolVersion = '0.8.8'
         junitVersion = '4.13.2'
         lombokVersion = '1.18.22'
         spockVersion = '2.2-groovy-3.0'
@@ -22,10 +23,8 @@ buildscript {
 }
 
 plugins {
-    // Apply the groovy plugin to also add support for Groovy (needed for Spock)
     id 'groovy'
 
-    // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
 
     id 'checkstyle'
@@ -38,19 +37,17 @@ plugins {
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
 dependencies {
-    // Use the latest Groovy version for Spock testing
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+
     testImplementation "org.codehaus.groovy:groovy:${groovyVersion}"
 
-    // Use the awesome Spock testing and specification framework even with Java
     testImplementation "org.spockframework:spock-core:${spockVersion}"
     testImplementation "junit:junit:${junitVersion}"
 
-    // This dependency is used by the application.
     implementation "com.google.guava:guava:${guavaVersion}"
 
     implementation "org.projectlombok:lombok:${lombokVersion}"
@@ -69,6 +66,9 @@ dependencies {
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}"
 
+    runtimeOnly 'org.postgresql:postgresql:42.2.19'
+    runtimeOnly 'com.h2database:h2:1.4.200'
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -80,32 +80,30 @@ dependencies {
 }
 
 application {
-    // Define the main class for the application.
     mainClass = 'pl.futurecollars.invoicing.App'
 }
 
 tasks.named('test') {
-    // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
 
-java{
-    toolchain{
+java {
+    toolchain {
         languageVersion = JavaLanguageVersion.of(14)
         vendor = JvmVendorSpec.ADOPTOPENJDK
     }
 }
 
 test {
-    finalizedBy jacocoTestReport // report is always generated after tests run
+    finalizedBy jacocoTestReport
     finalizedBy jacocoTestCoverageVerification
 }
 jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
+    dependsOn test
 }
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "${jococoToolVersion}"
     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
 

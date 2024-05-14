@@ -5,7 +5,7 @@ import pl.futurecollars.invoicing.db.memory.InMemoryDatabase
 import pl.futurecollars.invoicing.model.Invoice
 import spock.lang.Specification
 
-import static pl.futurecollars.invoicing.TestHelpers.invoice
+import static pl.futurecollars.invoicing.helpers.TestHelpers.invoice
 
 class InvoiceServiceIntegrationTest extends Specification {
 
@@ -96,7 +96,7 @@ class InvoiceServiceIntegrationTest extends Specification {
         Invoice updatedInvoice = new Invoice()
 
         when:
-               Optional<Invoice> result = service.update(123, updatedInvoice)
+        Optional<Invoice> result = service.update(123, updatedInvoice)
         then:
         result == Optional.empty()
     }
