@@ -19,6 +19,7 @@ buildscript {
         springDependencyVersion = '1.0.11.RELEASE'
         springFoxStarterVersion = '3.0.0'
         springFoxUiVersion = '3.0.0'
+        flywayVersion = '7.6.0'
     }
 }
 
@@ -42,6 +43,9 @@ repositories {
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    runtimeOnly 'org.postgresql:postgresql:42.2.19'
+    runtimeOnly 'com.h2database:h2:1.4.200'
+    implementation "org.flywaydb:flyway-core:${flywayVersion}"
 
     testImplementation "org.codehaus.groovy:groovy:${groovyVersion}"
 
@@ -137,6 +141,23 @@ jacocoTestCoverageVerification {
         }))
     }
 }
+
 tasks.named('startScripts') {
     dependsOn 'bootJar'
 }
+//
+//task testWithFileDatabase(type: Test) {
+//    systemProperty 'spring.profiles.active', 'file'
+//}
+//
+//task testWithMemoryDatabase(type: Test) {
+//    systemProperty 'spring.profiles.active', 'memory'
+//}
+//
+//task testWithSQLDatabase(type: Test) {
+//    systemProperty 'spring.profiles.active', 'sql'
+//}
+//
+//check.dependsOn testWithFileDatabase
+//check.dependsOn testWithFileDatabase
+////check.dependsOn testWithSqlDatabase
