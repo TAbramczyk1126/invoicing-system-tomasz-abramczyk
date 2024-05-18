@@ -1,6 +1,12 @@
 server:
   port: 7777
 
+invoicing-system:
+  database: memory
+  database.directory: db
+  database.invoices.file: invoices.txt
+  database.id.file: id.txt
+
 logging:
   level:
     org:
@@ -13,6 +19,6 @@ logging:
 
 spring:
   profiles:
-    active: memory
+    active: sql
   flyway:
     enabled: false

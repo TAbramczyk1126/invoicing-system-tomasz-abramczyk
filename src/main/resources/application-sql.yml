@@ -4,8 +4,3 @@ spring:
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
-  flyway:
-    enabled: true
-
-invoicing-system:
-  database: memory
