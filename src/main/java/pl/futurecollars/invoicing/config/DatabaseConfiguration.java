@@ -1,5 +1,4 @@
 package pl.futurecollars.invoicing.config;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +19,6 @@ import pl.futurecollars.invoicing.utils.JsonService;
 @Slf4j
 @Configuration
 public class DatabaseConfiguration {
-
   @Bean
   public IdProvider idService(FilesService fileService,
                               @Value("${invoicing-system.database.directory}") String databaseDirectory,
@@ -29,7 +27,6 @@ public class DatabaseConfiguration {
     Path idFilePath = Files.createTempFile(databaseDirectory, idFile);
     return new IdProvider(idFilePath, fileService);
   }
-
   @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "file")
   @Bean
   public Database fileBasedDatabase(IdProvider idProvider,
@@ -45,7 +42,6 @@ public class DatabaseConfiguration {
     Path databaseFilePath = Files.createTempFile(databaseDirectory, invoicesFile);
     return new FileBasedDatabase(databaseFilePath, idProvider, fileService, jsonService);
   }
-
   @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "memory")
   @Bean
   public Database inMemoryDatabase() {
