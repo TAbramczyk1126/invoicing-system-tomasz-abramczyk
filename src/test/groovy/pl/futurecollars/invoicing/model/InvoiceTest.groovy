@@ -16,8 +16,8 @@ class InvoiceTest extends Specification {
 
         def invoice = Invoice.builder()
                 .date(LocalDate.now())
-                .buyer(new Company(name: "bb", taxIdentifications: "213123123"))
-                .seller(new Company(name: "bb", taxIdentifications: "213123123"))
+                .buyer(new Company(name: "bb", taxIdentificationNumber: "213123123"))
+                .seller(new Company(name: "bb", taxIdentificationNumber: "213123123"))
                 .entries([invoiceEntry]).build()
         expect:
         invoice.entries != null

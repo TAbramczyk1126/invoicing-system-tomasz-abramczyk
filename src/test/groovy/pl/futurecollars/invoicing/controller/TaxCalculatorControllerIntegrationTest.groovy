@@ -3,7 +3,9 @@ package pl.futurecollars.invoicing.controller
 import pl.futurecollars.invoicing.model.Car
 import pl.futurecollars.invoicing.model.Invoice
 import pl.futurecollars.invoicing.model.InvoiceEntry
+import pl.futurecollars.invoicing.model.Vat
 import spock.lang.Unroll
+import java.time.LocalDate
 
 import static pl.futurecollars.invoicing.helpers.TestHelpers.company
 
@@ -106,15 +108,19 @@ class TaxCalculatorControllerIntegrationTest extends AbstractControllerTest {
     def "tax is calculated correctly when car is used for personal purposes"() {
         given:
         def invoice = Invoice.builder()
+                .date(LocalDate.now())
+                .number("no number :)")
                 .seller(company(1))
                 .buyer(company(2))
                 .entries(List.of(
                         InvoiceEntry.builder()
                                 .vatValue(BigDecimal.valueOf(23.45))
+                                .vatRate(Vat.VAT_23)
                                 .netPrice(BigDecimal.valueOf(100))
                                 .expensionRelatedToCar(
                                         Car.builder()
                                                 .personalUse(true)
+                                                .registrationNumber("KWI 555234")
                                                 .build()
                                 )
                                 .build()

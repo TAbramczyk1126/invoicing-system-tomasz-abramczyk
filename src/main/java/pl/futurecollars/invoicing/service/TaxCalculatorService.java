@@ -43,7 +43,7 @@ public class TaxCalculatorService {
   }
 
   public TaxCalculatorResult calculateTaxes(Company company) {
-    String taxIdentificationNumber = company.getTaxIdentifications();
+    String taxIdentificationNumber = company.getTaxIdentificationNumber();
 
     BigDecimal incomeMinusCosts = getEarnings(taxIdentificationNumber);
     BigDecimal incomeMinusCostsMinusPensionInsurance = incomeMinusCosts.subtract(company.getPensionInsurance());
@@ -86,11 +86,11 @@ public class TaxCalculatorService {
   }
 
   private Predicate<Invoice> sellerPredicate(String taxIdentificationNumber) {
-    return invoice -> taxIdentificationNumber.equals(invoice.getSeller().getTaxIdentifications());
+    return invoice -> taxIdentificationNumber.equals(invoice.getSeller().getTaxIdentificationNumber());
   }
 
   private Predicate<Invoice> buyerPredicate(String taxIdentificationNumber) {
-    return invoice -> taxIdentificationNumber.equals(invoice.getBuyer().getTaxIdentifications());
+    return invoice -> taxIdentificationNumber.equals(invoice.getBuyer().getTaxIdentificationNumber());
   }
 
 }
