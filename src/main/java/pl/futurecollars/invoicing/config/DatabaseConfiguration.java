@@ -22,6 +22,7 @@ import pl.futurecollars.invoicing.utils.JsonService;
 @Slf4j
 @Configuration
 public class DatabaseConfiguration {
+
   @Bean
   public IdProvider idService(FilesService fileService,
                               @Value("${invoicing-system.database.directory}") String databaseDirectory,

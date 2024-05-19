@@ -9,6 +9,7 @@ import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.model.InvoiceEntry;
 
 public interface Database {
+
   long save(Invoice invoice);
 
   Optional<Invoice> getById(long id);
@@ -26,6 +27,7 @@ public interface Database {
         .map(invoiceEntryValue)
         .reduce(BigDecimal.ZERO, BigDecimal::add);
   }
+
   default void reset() {
     getAll().forEach(invoice -> delete(invoice.getId()));
   }
