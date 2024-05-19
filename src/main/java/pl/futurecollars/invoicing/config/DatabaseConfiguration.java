@@ -1,4 +1,5 @@
 package pl.futurecollars.invoicing.config;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +12,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import pl.futurecollars.invoicing.db.Database;
 import pl.futurecollars.invoicing.db.file.FileBasedDatabase;
 import pl.futurecollars.invoicing.db.file.IdProvider;
+import pl.futurecollars.invoicing.db.jpa.InvoiceRepository;
+import pl.futurecollars.invoicing.db.jpa.JpaDatabase;
 import pl.futurecollars.invoicing.db.memory.InMemoryDatabase;
 import pl.futurecollars.invoicing.db.sql.SqlDatabase;
 import pl.futurecollars.invoicing.utils.FilesService;
@@ -27,6 +30,7 @@ public class DatabaseConfiguration {
     Path idFilePath = Files.createTempFile(databaseDirectory, idFile);
     return new IdProvider(idFilePath, fileService);
   }
+
   @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "file")
   @Bean
   public Database fileBasedDatabase(IdProvider idProvider,
@@ -42,6 +46,7 @@ public class DatabaseConfiguration {
     Path databaseFilePath = Files.createTempFile(databaseDirectory, invoicesFile);
     return new FileBasedDatabase(databaseFilePath, idProvider, fileService, jsonService);
   }
+
   @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "memory")
   @Bean
   public Database inMemoryDatabase() {
@@ -56,4 +61,9 @@ public class DatabaseConfiguration {
     return new SqlDatabase(jdbcTemplate);
   }
 
+  @Bean
+  @ConditionalOnProperty(name = "invoicing-system.database", havingValue = "jpa")
+  public Database jpaDatabase(InvoiceRepository invoiceRepository) {
+    return new JpaDatabase(invoiceRepository);
+  }
 }

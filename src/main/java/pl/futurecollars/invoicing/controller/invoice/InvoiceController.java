@@ -22,7 +22,7 @@ public class InvoiceController implements InvoiceApi {
   }
 
   @Override
-  public int add(@RequestBody Invoice invoice) {
+  public long add(@RequestBody Invoice invoice) {
     log.info("Used postMapping update - info");
     return invoiceService.save(invoice);
   }
