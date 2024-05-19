@@ -36,11 +36,9 @@ public class JpaDatabase implements Database {
 
     if (invoiceOptional.isPresent()) {
       Invoice invoice = invoiceOptional.get();
-
       updatedInvoice.setId(id); // just in case it was not set
       updatedInvoice.getBuyer().setId(invoice.getBuyer().getId());
       updatedInvoice.getSeller().setId(invoice.getSeller().getId());
-
       invoiceRepository.save(updatedInvoice);
     }
 
@@ -50,9 +48,7 @@ public class JpaDatabase implements Database {
   @Override
   public Optional<Invoice> delete(long id) {
     Optional<Invoice> invoice = getById(id);
-
     invoice.ifPresent(invoiceRepository::delete);
-
     return invoice;
   }
 }
