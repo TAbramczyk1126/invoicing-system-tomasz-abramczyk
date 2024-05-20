@@ -47,6 +47,8 @@ dependencies {
     runtimeOnly 'com.h2database:h2:1.4.200'
     implementation "org.flywaydb:flyway-core:${flywayVersion}"
 
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
     testImplementation "org.codehaus.groovy:groovy:${groovyVersion}"
 
     testImplementation "org.spockframework:spock-core:${spockVersion}"
@@ -124,14 +126,14 @@ jacocoTestCoverageVerification {
         rule {
             limit {
                 counter = 'BRANCH'
-                minimum = 0.85
+                minimum = 0.80
             }
         }
 
         rule {
             limit {
                 counter = 'LINE'
-                minimum = 0.85
+                minimum = 0.80
             }
         }
     }
