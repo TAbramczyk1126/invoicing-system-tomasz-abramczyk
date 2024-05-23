@@ -56,4 +56,5 @@ public class MongoBasedDatabase implements Database {
   private Document idFilter(long id) {
     return new Document("_id", id);
   }
+
 }
