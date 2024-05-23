@@ -1,9 +1,7 @@
 package pl.futurecollars.invoicing.helpers
 
-import pl.futurecollars.invoicing.model.Company
-import pl.futurecollars.invoicing.model.Invoice
-import pl.futurecollars.invoicing.model.InvoiceEntry
-import pl.futurecollars.invoicing.model.Vat
+import pl.futurecollars.invoicing.model.*
+
 import java.time.LocalDate
 
 class TestHelpers {
@@ -23,9 +21,15 @@ class TestHelpers {
                 .description("Programming course $id")
                 .quantity(4.11)
                 .netPrice(BigDecimal.valueOf(id * 1000).setScale(2))
-                        .vatValue(BigDecimal.valueOf(id * 1000 * 0.08).setScale(2))
-                        .vatRate(Vat.VAT_8)
-                        .build()
+                .vatValue(BigDecimal.valueOf(id * 1000 * 0.08).setScale(2))
+                .vatRate(Vat.VAT_8)
+                .expensionRelatedToCar(id % 2 == 0 ? null :
+                        Car.builder()
+                                .registrationNumber("XYZ")
+                                .personalUse(false)
+                                .build()
+                )
+                .build()
     }
 
     static invoice(long id) {
