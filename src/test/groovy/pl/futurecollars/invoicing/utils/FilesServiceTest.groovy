@@ -66,4 +66,10 @@ class FilesServiceTest extends Specification {
         expect:
         new FilesService().readAllLines(path) == lines
     }
+
+    def "empty file returns empty collection"() {
+        expect:
+        [] == filesService.readAllLines(path)
+    }
+
 }
