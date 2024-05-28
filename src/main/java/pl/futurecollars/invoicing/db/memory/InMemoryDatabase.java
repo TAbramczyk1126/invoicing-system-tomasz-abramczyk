@@ -11,13 +11,13 @@ import pl.futurecollars.invoicing.model.WithId;
 public class InMemoryDatabase<T extends WithId> implements Database<T> {
 
   private final Map<Long, T> items = new HashMap<>();
-  private long nexId = 1;
+  private long nextId = 1;
 
   @Override
   public long save(T item) {
-    item.setId(nexId);
-    items.put(nexId, item);
-    return nexId++;
+    item.setId(nextId);
+    items.put(nextId, item);
+    return nextId++;
   }
 
   @Override
