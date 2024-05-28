@@ -1,6 +1,10 @@
 package pl.futurecollars.invoicing.helpers
 
-import pl.futurecollars.invoicing.model.*
+import pl.futurecollars.invoicing.model.Car
+import pl.futurecollars.invoicing.model.Company
+import pl.futurecollars.invoicing.model.Invoice
+import pl.futurecollars.invoicing.model.InvoiceEntry
+import pl.futurecollars.invoicing.model.Vat
 
 import java.time.LocalDate
 
@@ -48,7 +52,7 @@ class TestHelpers {
         invoice.getSeller().id = 0
         invoice.entries.forEach {
             it.id = 0
-            it.expenseRelatedToCar?.id = 0
+            it.expensionRelatedToCar?.id = 0
         }
         invoice
     }
