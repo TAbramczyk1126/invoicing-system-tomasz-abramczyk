@@ -18,7 +18,7 @@ class FileBasedDatabaseIntegrationTest extends AbstractDatabaseTest {
         databasePath = File.createTempFile("testDatabase", ".txt").toPath()
         FilesService filesService = new FilesService()
         JsonService jsonService = new JsonService()
-        IdProvider idService = new IdProvider(File.createTempFile("testId", ".txt").toPath(), filesService)
+        IdService idService = new IdService(File.createTempFile("testId", ".txt").toPath(), filesService)
         return new FileBasedDatabase(databasePath, idService, filesService, jsonService)
     }
 
