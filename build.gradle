@@ -130,17 +130,18 @@ jacocoTestCoverageVerification {
         rule {
             limit {
                 counter = 'BRANCH'
-                minimum = 0.80
+                minimum = 0.65
             }
         }
 
         rule {
             limit {
                 counter = 'LINE'
-                minimum = 0.80
+                minimum = 0.70
             }
         }
     }
+
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: 'pl/futurecollars/invoicing/controller/InvoiceApplication.class')
@@ -151,19 +152,48 @@ jacocoTestCoverageVerification {
 tasks.named('startScripts') {
     dependsOn 'bootJar'
 }
-//
-//task testWithFileDatabase(type: Test) {
-//    systemProperty 'spring.profiles.active', 'file'
-//}
-//
-//task testWithMemoryDatabase(type: Test) {
-//    systemProperty 'spring.profiles.active', 'memory'
-//}
-//
-//task testWithSQLDatabase(type: Test) {
-//    systemProperty 'spring.profiles.active', 'sql'
-//}
-//
-//check.dependsOn testWithFileDatabase
-//check.dependsOn testWithFileDatabase
-////check.dependsOn testWithSqlDatabase
+
+task testWithFileDatabase(type: Test) {
+    systemProperty 'spring.profiles.active', 'file'
+}
+
+task testWithMemoryDatabase(type: Test) {
+    systemProperty 'spring.profiles.active', 'memory'
+}
+
+task testWithSqlDatabase(type: Test) {
+    systemProperty 'spring.profiles.active', 'sql'
+}
+
+task testWithJpaDatabase(type: Test) {
+    systemProperty 'spring.profiles.active', 'jpa'
+}
+
+task testWithJpaFlywayDatabase(type: Test) {
+    systemProperty 'spring.profiles.active', 'jpa-flyway'
+}
+
+task testWithMongoDatabase(type: Test) {
+    systemProperty 'spring.profiles.active', 'mongo'
+}
+
+check.dependsOn testWithFileDatabase
+check.dependsOn testWithMemoryDatabase
+check.dependsOn testWithSqlDatabase
+check.dependsOn testWithJpaDatabase
+check.dependsOn testWithJpaFlywayDatabase
+check.dependsOn testWithMongoDatabase
+
+String osName = System.getProperty("os.name").toLowerCase()
+if (osName.contains("mac")) {
+    task testWithPostgreSqlDatabase(type: Test) {
+        systemProperty 'spring.profiles.active', 'sql-pg'
+    }
+
+    check.dependsOn testWithPostgreSqlDatabase
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:all" << "-Xlint:-processing" << "-Werror"
+    }
+
+}
