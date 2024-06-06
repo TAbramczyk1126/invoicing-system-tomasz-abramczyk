@@ -21,7 +21,7 @@ let fixture: ComponentFixture<AppComponent>;
               FormsModule
             ]
     }).compileComponents();
-  fixture = TestBed.createComponent(AppComponent);
+     fixture = TestBed.createComponent(AppComponent);
      component = fixture.componentInstance;
 
      component.ngOnInit()
@@ -52,8 +52,8 @@ let fixture: ComponentFixture<AppComponent>;
       const addInvoiceBtn: HTMLElement = fixture.nativeElement.querySelector("#addCompanyBtn")
       addInvoiceBtn.click()
 
-    fixture.detectChanges();
-   expect(fixture.nativeElement.innerText).toContain("333-333-33-33	ul. Third 3	Third Ltd.	0	0")
+      fixture.detectChanges();
+      expect(fixture.nativeElement.innerText).toContain("333-333-33-33	ul. Third 3	Third Ltd.	0	0")
   });
 
   class MockCompanyService {
