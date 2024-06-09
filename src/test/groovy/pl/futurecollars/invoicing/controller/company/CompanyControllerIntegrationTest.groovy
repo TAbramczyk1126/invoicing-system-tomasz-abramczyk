@@ -10,6 +10,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import static pl.futurecollars.invoicing.helpers.TestHelpers.company
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf
+
 @Unroll
 class CompanyControllerIntegrationTest extends AbstractControllerTest {
 
@@ -71,6 +73,7 @@ class CompanyControllerIntegrationTest extends AbstractControllerTest {
         expect:
         mockMvc.perform(
                 delete("$COMPANY_ENDPOINT/$id")
+                        .with(csrf())
         )
                 .andExpect(status().isNotFound())
 
@@ -87,6 +90,7 @@ class CompanyControllerIntegrationTest extends AbstractControllerTest {
                 put("$COMPANY_ENDPOINT/$id")
                         .content(companyAsJson(1))
                         .contentType(MediaType.APPLICATION_JSON)
+                        .with(csrf())
         )
                 .andExpect(status().isNotFound())
 
@@ -105,6 +109,7 @@ class CompanyControllerIntegrationTest extends AbstractControllerTest {
                 put("$COMPANY_ENDPOINT/$id")
                         .content(jsonService.toJson(updatedCompany))
                         .contentType(MediaType.APPLICATION_JSON)
+                        .with(csrf())
         )
                 .andExpect(status().isNoContent())
 
