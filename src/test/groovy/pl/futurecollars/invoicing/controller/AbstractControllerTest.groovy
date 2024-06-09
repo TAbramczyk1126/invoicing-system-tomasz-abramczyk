@@ -77,7 +77,7 @@ class AbstractControllerTest extends Specification {
     }
 
     void deleteCompany(long id) {
-        mockMvc.perform(delete("$INVOICE_ENDPOINT/$id").with(csrf()))
+        mockMvc.perform(delete("$COMPANY_ENDPOINT/$id").with(csrf()))
                 .andExpect(status().isNoContent())
     }
 
