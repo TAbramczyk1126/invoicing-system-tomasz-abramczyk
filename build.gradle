@@ -93,7 +93,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'pl.futurecollars.invoicing.App'
+    mainClass = 'pl.futurecollars.invoicing.InvoiceApplication'
 }
 
 tasks.named('test') {
