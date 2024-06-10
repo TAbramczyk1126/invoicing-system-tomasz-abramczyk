@@ -87,6 +87,9 @@ dependencies {
 
     implementation "org.mongodb:mongo-java-driver:${mongoVersion}"
 
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-test'
+
 }
 
 application {
@@ -144,7 +147,9 @@ jacocoTestCoverageVerification {
 
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: 'pl/futurecollars/invoicing/controller/InvoiceApplication.class')
+            fileTree(dir: it, exclude: [
+                    'pl/futurecollars/invoicing/InvoiceApplication.class',
+                    'pl/futurecollars/invoicing/config/*'])
         }))
     }
 }
